@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableHighlight } from 'react-native';
 import axios from 'axios';
 import { Searchbar } from 'react-native-paper';
-import { theme } from '../styles/theme'; 
-import { Product } from 'types';
+import { theme } from '../styles/theme';
+import { CatalogScreenNavigationProp, Product } from 'types';
 
-export default function CatalogScreen() {
+type Props = {
+  navigation: CatalogScreenNavigationProp;
+};
+
+export default function CatalogScreen({ navigation }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -27,14 +31,17 @@ export default function CatalogScreen() {
   );
 
   const renderItem = ({ item }: { item: Product }) => (
-    <View style={styles.item}>
-      <Image style={styles.image} source={{ uri: item.thumbnail }} />
-      <View style={styles.itemContent}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.brand}>{item.brand}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+    <TouchableHighlight activeOpacity={1} underlayColor="none" onPress={() => navigation.navigate("Detalhes", item)}>
+      <View style={styles.item}>
+        <Image style={styles.image} source={{ uri: item.thumbnail }} />
+        <View style={styles.itemContent}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.brand}>{item.brand}</Text>
+          <Text style={styles.description}>{item.description}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableHighlight>
+
   );
 
   return (

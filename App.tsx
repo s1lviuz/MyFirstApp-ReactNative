@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import CatalogScreen from './screens/CatalogScreen';
-import { RootStackParamList } from './types';
+import ProductDetailScreen from './screens/ProductDetail';
+import { RootStackParamList } from 'types';
 import { useFonts } from 'expo-font';
 import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
 import { theme } from './styles/theme';
@@ -39,6 +40,7 @@ export default function App() {
         <Stack.Navigator screenOptions={screenOptions}>
           <Stack.Screen name="Início" component={HomeScreen} />
           <Stack.Screen name="Catálogo" component={CatalogScreen} />
+          <Stack.Screen name="Detalhes" component={ProductDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

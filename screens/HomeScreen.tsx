@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { HomeScreenNavigationProp, Product } from '../types';
+import { Button, StyleSheet, Image, View, Text } from 'react-native';
+import { HomeScreenNavigationProp } from '../types';
 import { theme } from '../styles/theme';
+import ProductList from '../components/ProductList';
 
 type Props = {
   navigation: HomeScreenNavigationProp;
@@ -15,7 +16,16 @@ export default function HomeScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home Screen</Text>
+      <View style={styles.main}>
+        <Image
+          accessibilityLabel="React logo"
+          source={require('../assets/LogoMenu.png')}
+          resizeMode="contain"
+          style={styles.logo}
+        />
+        <Text style={styles.title}>Sua empresa aqui</Text>
+        <ProductList navigation={navigation} />
+      </View>
       <Button title="Catálogo de produtos" onPress={handlePressCatalog} />
     </View>
   );
@@ -25,14 +35,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingVertical: 28
+  },
+  main: {
+    flex: 1,
+    backgroundColor: '#fff',
+    gap: 16,
+    alignItems: 'center'
   },
   logo: {
-    width: 150,
     height: 150,
-    marginBottom: 32,
   },
   title: {
     fontSize: 24,
